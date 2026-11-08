@@ -1,0 +1,85 @@
+[
+  {
+    "name": "simple_english_invoice",
+    "text": "INVOICE\nAcme Hardware Ltd\nDate: 2026-01-15\nLaptop stand | qty 2 | 40.00\nUSB hub | qty 1 | 25.50\nTotal: 65.50 USD",
+    "expected": {
+      "vendor": "Acme Hardware Ltd",
+      "document_date": "2026-01-15",
+      "total_amount": 65.5,
+      "currency": "USD",
+      "line_items": [
+        {"description": "Laptop stand", "quantity": 2, "amount": 40.0},
+        {"description": "USB hub", "quantity": 1, "amount": 25.5}
+      ]
+    }
+  },
+  {
+    "name": "german_invoice_comma_decimals",
+    "text": "RECHNUNG\nBeispiel Handel GmbH\nRechnungsdatum: 05.03.2026\nNotebook A | Menge 1 | 399,00 EUR\nNotebook B | Menge 2 | 758,00 EUR\nGesamtbetrag: 1.157,00 EUR",
+    "expected": {
+      "vendor": "Beispiel Handel GmbH",
+      "document_date": "2026-03-05",
+      "total_amount": 1157.0,
+      "currency": "EUR",
+      "line_items": [
+        {"description": "Notebook A", "quantity": 1, "amount": 399.0},
+        {"description": "Notebook B", "quantity": 2, "amount": 758.0}
+      ]
+    }
+  },
+  {
+    "name": "receipt_without_date",
+    "text": "Cafe Sonne\nKaffee 3,20 EUR\nKuchen 4,50 EUR\nSumme 7,70 EUR",
+    "expected": {
+      "vendor": "Cafe Sonne",
+      "document_date": null,
+      "total_amount": 7.7,
+      "currency": "EUR",
+      "line_items": [
+        {"description": "Kaffee", "quantity": null, "amount": 3.2},
+        {"description": "Kuchen", "quantity": null, "amount": 4.5}
+      ]
+    }
+  },
+  {
+    "name": "date_written_out",
+    "text": "Invoice No. 4711\nFrom: Nordwind Services AB\nDate: 12 Feb 2026\nConsulting services, fixed fee\nAmount due: SEK 12,000.00",
+    "expected": {
+      "vendor": "Nordwind Services AB",
+      "document_date": "2026-02-12",
+      "total_amount": 12000.0,
+      "currency": "SEK"
+    }
+  },
+  {
+    "name": "us_style_quote",
+    "text": "Quote from Blue River Co.\nIssued March 3, 2026\nTotal due $120.00",
+    "expected": {
+      "vendor": "Blue River Co.",
+      "document_date": "2026-03-03",
+      "total_amount": 120.0,
+      "currency": "USD"
+    }
+  },
+  {
+    "name": "thousands_separator",
+    "text": "Zentrale Buero GmbH\nDatum: 2026-03-01\nTotal: 2,450.99 EUR",
+    "expected": {
+      "vendor": "Zentrale Buero GmbH",
+      "document_date": "2026-03-01",
+      "total_amount": 2450.99,
+      "currency": "EUR"
+    }
+  },
+  {
+    "name": "no_invoice_at_all_must_not_invent",
+    "text": "Hello, thanks for your order! See you soon.",
+    "expected": {
+      "vendor": null,
+      "document_date": null,
+      "total_amount": null,
+      "currency": null,
+      "line_items": []
+    }
+  }
+]
